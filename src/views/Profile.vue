@@ -1,62 +1,69 @@
 <template>
-<form 
-@keyup.enter="handelSubmit"
-autocomplete="on"
-:class="tem"
-id="formProflie"
->
+  <form
+    @keyup.enter="handelSubmit"
+    autocomplete="on"
+    :class="tem"
+    id="formProflie"
+  >
+    <label>{{ t("Username") }}</label>
+    <input type="text" class="username" v-model="username" required />
 
-<label>{{t('Username')}}</label>
-<input  type="text" class="username"  v-model="username" required>
+    <label>{{ t("Theme") }}</label>
+    <select v-model="themes" required>
+      <option value="blueSky">{{ t("Blue Sky") }}</option>
+      <option value="SilverMoon">{{ t("Silver Moon") }}</option>
+      <option value="fallOfAutumn">{{ t("Fall Of Autumn") }}</option>
+      <option value="dayInSummer">{{ t("Day In Summer") }}</option>
+    </select>
+    <div>
+      <label>{{ t("Language") }}</label>
+    </div>
+    <a-radio-group @change="changeLocale" v-model:value="lang" class="lang">
+      <a-radio-button class="blang" value="en" :class="tem"
+        >English</a-radio-button
+      >
+      <a-radio-button class="blang" value="fa" :class="tem"
+        >فارسی</a-radio-button
+      >
+    </a-radio-group>
 
-<label>{{t('Theme')}}</label>
-<select v-model="themes" required>
-  <option value="blueSky">{{t('Blue Sky')}}</option>
-  <option value="SilverMoon">{{t('Silver Moon')}}</option>
-  <option value="fallOfAutumn">{{t('Fall Of Autumn')}}</option>
-  <option value="dayInSummer">{{t('Day In Summer')}}</option>
-</select>
-<div><label>{{t('Language')}}</label></div>
-<a-radio-group @change="changeLocale" v-model:value="lang" class="lang">
-  <a-radio-button class="blang" value="en" :class="tem">English</a-radio-button>
-  <a-radio-button class="blang" value="fa" :class="tem">فارسی</a-radio-button>
-</a-radio-group>
+    <div class="terms">
+      <input type="checkbox" v-model="terms" required />
+      <label>{{ t("Accept term and conditions") }}</label>
+    </div>
 
-<div class="terms">
-  <input type="checkbox" v-model="terms" required>
-  <label>{{t('Accept term and conditions')}}</label>
-</div>
-
-<div class="submit">
-  <button @click="handelSubmit" class="save" html-type="submit">{{t('Save')}}</button>
-</div>
-</form>
+    <div class="submit">
+      <button @click="handelSubmit" class="save" html-type="submit">
+        {{ t("Save") }}
+      </button>
+    </div>
+  </form>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import i18n from "../i18n"
-import { useI18n } from "vue-i18n"
+import { ref } from "vue";
+import i18n from "../i18n";
+import { useI18n } from "vue-i18n";
 
-const lang = ref< "en" | "fa" >('en')
-const username = ref('')
-const terms = ref<boolean>()
-const themes = ref('blueSky')
-let tem : string|null
-tem = localStorage.getItem("thems")
+const lang = ref<"en" | "fa">("en");
+const username = ref("");
+const terms = ref<boolean>();
+const themes = ref("blueSky");
+let tem: string | null;
+tem = localStorage.getItem("thems");
 
 const { t } = useI18n({
   inheritLocale: true,
-  useScope: 'local'
-})
+  useScope: "local",
+});
 const changeLocale = () => {
-i18n.global.locale.value = lang.value
-}
+  i18n.global.locale.value = lang.value;
+};
 
 function handelSubmit() {
-localStorage.setItem( "username", username.value.trim())
-localStorage.setItem("lang", lang.value)
-localStorage.setItem("thems", themes.value)
+  localStorage.setItem("username", username.value.trim());
+  localStorage.setItem("lang", lang.value);
+  localStorage.setItem("thems", themes.value);
 }
 </script>
 
@@ -77,7 +84,8 @@ label {
   text-transform: uppercase;
   font-weight: bold;
 }
-input, select {
+input,
+select {
   color: inherit;
   display: block;
   padding: 10px 6px;
@@ -105,14 +113,13 @@ button {
   border-radius: 20px;
   cursor: pointer;
 }
-.submit{
+.submit {
   text-align: center;
 }
-.lang{
-margin: 1px;
+.lang {
+  margin: 1px;
 }
-.blang{
-width: 100px;
+.blang {
+  width: 100px;
 }
-
 </style>

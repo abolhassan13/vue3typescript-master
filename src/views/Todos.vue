@@ -1,68 +1,62 @@
 <template>
+  <header>
+    <h3>{{ t("TODO list") }}</h3>
+  </header>
+  <form @submit.prevent="handeleSubmit" class="addTodo">
+    <input v-model="newTask" placeholder="Add new Todo" />
+    <button @click="handeleSubmit" :class="tem">{{ t("Add") }}</button>
+  </form>
 
-<header>
-  <h3>{{t('TODO list')}}</h3>
-</header>
-<form 
-@submit.prevent="handeleSubmit" 
-class="addTodo">
-  <input v-model="newTask" placeholder="Add new Todo" />
-  <button @click="handeleSubmit" :class="tem">{{t('Add')}}</button>
-</form>
-
-<div v-for="task of tasks" :key="task.id" class="task-list">
-  <div class="task">
-    <h3>{{ task.title }}</h3>
-    <div class="icon">
-          <i
-          class="material-icons"
-          @click="deleteTask(task.id)"
-          >delete</i>
+  <div v-for="task of tasks" :key="task.id" class="task-list">
+    <div class="task">
+      <h3>{{ task.title }}</h3>
+      <div class="icon">
+        <i class="material-icons" @click="deleteTask(task.id)">delete</i>
+      </div>
     </div>
   </div>
-</div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useI18n } from "vue-i18n"
+import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 
-let tem : string|null
-tem = localStorage.getItem("thems")
+let tem: string | null;
+tem = localStorage.getItem("thems");
 
 const { t } = useI18n({
   inheritLocale: true,
-  useScope: 'local'
-})
+  useScope: "local",
+});
 
 let tasks = ref([
-{
-"title": "Learning typescript",
-"id": 2
-},
-{
-"title": "doing workout",
-"id": 3
-},
-{
-"title": "Watching One Peice",
-"id": 4
-}
-])
-const newTask = ref('')
+  {
+    title: "Learning typescript",
+    id: 2,
+  },
+  {
+    title: "doing workout",
+    id: 3,
+  },
+  {
+    title: "Watching One Peice",
+    id: 4,
+  },
+]);
+const newTask = ref("");
 
 function handeleSubmit() {
-if (newTask.value.length > 0) {
-tasks.value.push({
-title: newTask.value,
-id: Math.floor(Math.random() * 10000)
-});
-newTask.value = '';
-}}
-
-function deleteTask(id: number) {
-tasks.value = tasks.value.filter((task) => id !== task.id)
+  if (newTask.value.length > 0) {
+    tasks.value.push({
+      title: newTask.value,
+      id: Math.floor(Math.random() * 10000),
+    });
+    newTask.value = "";
+  }
 }
 
+function deleteTask(id: number) {
+  tasks.value = tasks.value.filter((task) => id !== task.id);
+}
 </script>
 
 <style scoped>
@@ -82,7 +76,6 @@ header h1 {
   transform: rotate(2deg);
 }
 form {
-
   margin: 0 auto;
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -102,11 +95,10 @@ form input {
   color: #555;
   font-size: 1em;
 }
-.addTodo{
+.addTodo {
   display: inline-flex;
-  
 }
-.addTodo input{
+.addTodo input {
   border-radius: 10px;
 }
 
@@ -119,12 +111,13 @@ form input {
   background: #fff;
   margin-top: 20px;
   border-radius: 4px;
-  box-shadow: 2px 4px 6px rgba(0,0,0,0.05);
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.task h3, .task .icons {
+.task h3,
+.task .icons {
   display: inline-block;
 }
 .task .icons {
