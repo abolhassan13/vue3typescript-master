@@ -9,7 +9,6 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmits } from "vue";
-
 interface task {
   title: string;
   id: number;
@@ -21,7 +20,7 @@ const emit = defineEmits<{
   (e: "delete-Task", task: task): void;
 }>();
 
-function deleteTask(): void {
+function deleteTask() {
   emit("delete-Task", props.task);
 }
 </script>
