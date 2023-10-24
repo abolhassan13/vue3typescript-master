@@ -15,9 +15,9 @@
 </template>
 
 <script setup lang="ts">
-import axios from "axios";
 import { ref } from "vue";
 import citiesIran from "../store/ir.json";
+import { getWaether } from "@/component/Weather/Weather";
 
 interface Option {
   value: string;
@@ -1276,14 +1276,12 @@ const options = ref<Option[]>([
 
 const getCity = async () => {
   const cityName = citiesIran.find((element) => element.city === value.value);
-  let city = cityName?.city;
   value.value = "";
-  const response = await axios.get(
-    `https://api.open-meteo.com/v1/forecast?latitude=${cityName?.lat}&longitude=${cityName?.lng}&current_weather=true`
-  );
-  let data = response.data.current_weather;
-  updateUI(city, data);
+  const data: { weathercode: number; temperature: number; is_day: string } =
+    await getWaether(cityName);
+  updateUI(cityName?.city, data);
 };
+
 const updateUI = (
   city: string | undefined,
   data: { weathercode: number; temperature: number; is_day: string }
