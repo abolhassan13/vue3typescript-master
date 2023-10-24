@@ -1,20 +1,16 @@
 <template>
   <div class="dashbord">
-    <span class="clock" :class="tem"
-      >{{ currentTime.getHours() }}:{{
-        currentTime.getMinutes().toString().padStart(2, "0")
-      }}</span
-    >
+    <span class="clock" :class="tem"> {{ Hours }}:{{ Minutes }} </span>
     <h3 class="wellcome-message">
-      {{ t(`${timeMessage}`) }} ,<span>{{ username }}</span>
+      {{ t(`${timeMessage}`) }} <span>{{ username }}</span>
     </h3>
   </div>
   <div></div>
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
+import { useCurrentTime } from "@/component/Home/Time";
 
 if (!localStorage.getItem("username")) {
   let name = prompt(
@@ -37,27 +33,19 @@ const { t } = useI18n({
   useScope: "local",
 });
 
-const useCurrentTime = () => {
-  const currentTime = ref(new Date());
-  const updateCurrentTime = () => {
-    currentTime.value = new Date();
-  };
-  const updateTimeInterval = setInterval(updateCurrentTime, 1000);
-  onBeforeUnmount(() => {
-    clearInterval(updateTimeInterval);
-  });
-  return {
-    currentTime,
-  };
-};
 const { currentTime } = useCurrentTime();
+const Hours: number = currentTime.value.getHours();
+const Minutes: string = currentTime.value
+  .getMinutes()
+  .toString()
+  .padStart(2, "0");
 
 let timeMessage = "";
-if (currentTime.value.getHours() > 20 || currentTime.value.getHours() < 7) {
+if (Hours > 20 || Hours < 7) {
   timeMessage = "Good Night";
-} else if (currentTime.value.getHours() > 17) {
+} else if (Hours > 17) {
   timeMessage = "Good Evining";
-} else if (currentTime.value.getHours() > 12) {
+} else if (Hours > 12) {
   timeMessage = "Good Afternoon";
 } else {
   timeMessage = "Good Morning";
