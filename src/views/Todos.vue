@@ -8,17 +8,14 @@
   </form>
 
   <div v-for="task of tasks" :key="task.id" class="task-list">
-    <div class="task">
-      <h3>{{ task.title }}</h3>
-      <div class="icon">
-        <i class="material-icons" @click="deleteTask(task.id)">delete</i>
-      </div>
-    </div>
+    <TodoDetail :task="task" @delete-Task="deleteTask" />
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+import TodoDetail from "../component/Todos/TodoDetail.vue";
 
 let tem: string | null;
 tem = localStorage.getItem("thems");
@@ -28,13 +25,17 @@ const { t } = useI18n({
   useScope: "local",
 });
 
+interface task {
+  title: string;
+  id: number;
+}
 let tasks = ref([
   {
     title: "Learning typescript",
     id: 2,
   },
   {
-    title: "doing workout",
+    title: "Doing workout",
     id: 3,
   },
   {
@@ -54,8 +55,8 @@ function handeleSubmit() {
   }
 }
 
-function deleteTask(id: number) {
-  tasks.value = tasks.value.filter((task) => id !== task.id);
+function deleteTask(payload: task) {
+  tasks.value = tasks.value.filter((task) => payload.id !== task.id);
 }
 </script>
 
@@ -105,31 +106,5 @@ form input {
 .task-list {
   max-width: 640px;
   margin: 20px auto;
-}
-.task {
-  padding: 6px 20px;
-  background: #fff;
-  margin-top: 20px;
-  border-radius: 4px;
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.05);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.task h3,
-.task .icons {
-  display: inline-block;
-}
-.task .icons {
-  text-align: right;
-}
-.task i {
-  font-size: 1.4em;
-  margin-left: 6px;
-  cursor: pointer;
-  color: #bbb;
-}
-.task i:hover {
-  color: #ff005d;
 }
 </style>
