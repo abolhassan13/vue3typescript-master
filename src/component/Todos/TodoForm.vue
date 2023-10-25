@@ -22,7 +22,7 @@ const emit = defineEmits<{
   (e: "add-Task", newTask: string): void;
 }>();
 
-function handeleSubmit() {
+function handeleSubmit():void {
   if (newTask.value.length > 0) {
     emit("add-Task", newTask.value);
     newTask.value = "";
