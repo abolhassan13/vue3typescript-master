@@ -1274,21 +1274,25 @@ const options = ref<Option[]>([
   },
 ]);
 
-const getCity = async () => {
+const getCity = async (): Promise<void> => {
   const cityName = citiesIran.find((element) => element.city === value.value);
   value.value = "";
-  const data: { weathercode: number; temperature: number; is_day: string } =
+  const data: { weathercode: Number; temperature: Number; is_day: String } =
     await getWaether(cityName);
   updateUI(cityName?.city, data);
 };
 
 const updateUI = (
   city: string | undefined,
-  data: { weathercode: number; temperature: number; is_day: string }
-) => {
-  const deteils = document.querySelector(".details");
-  const card = document.querySelector(".card");
-  let weatherCodes = [
+  data: { weathercode: Number; temperature: Number; is_day: String }
+): void => {
+  const deteils: Element | null = document.querySelector(".details");
+  const card: Element | null = document.querySelector(".card");
+  interface weatherCode {
+    state: number;
+    text: string;
+  }
+  let weatherCodes: weatherCode[] = [
     {
       state: 0,
       text: "clear sky",
@@ -1402,8 +1406,10 @@ const updateUI = (
       text: "Thunderstorm",
     },
   ];
-  let wCode = data.weathercode;
-  const greaterElement = weatherCodes.find((elemet) => elemet.state === wCode);
+  let wCode: Number = data.weathercode;
+  const greaterElement: weatherCode | undefined = weatherCodes.find(
+    (elemet) => elemet.state === wCode
+  );
   deteils!.innerHTML = `
     <div>
     <h1  style=" padding: 35px; font-size: 26px;">${city}</h1>
@@ -1423,9 +1429,6 @@ const updateUI = (
 </script>
 
 <style scoped>
-.none {
-  display: none;
-}
 .night {
   background-image: url(../assets/night.svg);
   background-repeat: no-repeat;
