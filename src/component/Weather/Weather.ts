@@ -1,19 +1,19 @@
 import axios from "axios";
 interface Data {
-  weathercode: Number
-  temperature: Number
-  is_day: String
+  weathercode: number
+  temperature: number
+  is_day: string
 }
 interface CityName {
-  city: String
-  lat: String
-  lng: String
-  country: String
-  iso2: String
-  admin_name: String
-  capital: String
-  population: String
-  population_proper: String
+  city: string
+  lat: string
+  lng: string
+  country: string
+  iso2: string
+  admin_name: string
+  capital: string
+  population: string
+  population_proper: string
 }
 export const getWaether = async (
   cityName: CityName | undefined

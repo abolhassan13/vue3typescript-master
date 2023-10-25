@@ -1277,14 +1277,14 @@ const options = ref<Option[]>([
 const getCity = async (): Promise<void> => {
   const cityName = citiesIran.find((element) => element.city === value.value);
   value.value = "";
-  const data: { weathercode: Number; temperature: Number; is_day: String } =
+  const data: { weathercode: number; temperature: number; is_day: string } =
     await getWaether(cityName);
   updateUI(cityName?.city, data);
 };
 
 const updateUI = (
   city: string | undefined,
-  data: { weathercode: Number; temperature: Number; is_day: String }
+  data: { weathercode: number; temperature: number; is_day: string }
 ): void => {
   const deteils: Element | null = document.querySelector(".details");
   const card: Element | null = document.querySelector(".card");
@@ -1406,7 +1406,7 @@ const updateUI = (
       text: "Thunderstorm",
     },
   ];
-  let wCode: Number = data.weathercode;
+  let wCode: number = data.weathercode;
   const greaterElement: weatherCode | undefined = weatherCodes.find(
     (elemet) => elemet.state === wCode
   );
