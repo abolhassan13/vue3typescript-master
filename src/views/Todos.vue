@@ -12,9 +12,9 @@
 import { useI18n } from "vue-i18n";
 import TodoDetail from "../component/Todos/TodoDetail.vue";
 import TodoForm from "../component/Todos/TodoForm.vue";
-import { todoStore } from '@/store/TodoStore'
+import { todoStore } from "@/store/TodoStore";
 
-let store = todoStore
+let store = todoStore;
 
 const { t } = useI18n({
   inheritLocale: true,
@@ -25,11 +25,11 @@ interface task {
   title: string;
   id: number;
 }
-function addTodo(payload: string):void {
-  store.dispatch('addTodo', payload)
+function addTodo(payload: string): void {
+  store.dispatch("addTodo", payload);
 }
-function deleteTodo(payload: task):void {
-  store.dispatch('deleteTodo', payload)
+function deleteTodo(payload: task): void {
+  store.dispatch("deleteTodo", payload);
 }
 </script>
 
