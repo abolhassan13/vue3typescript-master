@@ -1,23 +1,27 @@
 import axios from "axios";
+interface Data {
+  weathercode: Number
+  temperature: Number
+  is_day: String
+}
+interface CityName {
+  city: String
+  lat: String
+  lng: String
+  country: String
+  iso2: String
+  admin_name: String
+  capital: String
+  population: String
+  population_proper: String
+}
 export const getWaether = async (
-  cityName:
-    | {
-        city: string;
-        lat: string;
-        lng: string;
-        country: string;
-        iso2: string;
-        admin_name: string;
-        capital: string;
-        population: string;
-        population_proper: string;
-      }
-    | undefined
+  cityName: CityName | undefined
 ) => {
   const response = await axios.get(
     `https://api.open-meteo.com/v1/forecast?latitude=${cityName?.lat}&longitude=${cityName?.lng}&current_weather=true`
   );
-  const data: { weathercode: number; temperature: number; is_day: string } =
+  const data: Data =
     response.data.current_weather;
   return { ...data };
 };
