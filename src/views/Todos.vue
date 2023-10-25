@@ -3,16 +3,18 @@
     <h3>{{ t("TODO list") }}</h3>
   </header>
   <TodoForm @add-Task="addTodo" />
-  <div v-for="task of tasks" :key="task.id" class="task-list">
+  <div v-for="task of store.state.tasks" :key="task.id" class="task-list">
     <TodoDetail :task="task" @delete-Task="deleteTodo" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import TodoDetail from "../component/Todos/TodoDetail.vue";
 import TodoForm from "../component/Todos/TodoForm.vue";
+import { todoStore } from '@/store/TodoStore'
+
+let store = todoStore
 
 const { t } = useI18n({
   inheritLocale: true,
@@ -23,30 +25,11 @@ interface task {
   title: string;
   id: number;
 }
-let tasks = ref<task[]>([
-  {
-    title: "Learning typescript",
-    id: 2,
-  },
-  {
-    title: "Doing workout",
-    id: 3,
-  },
-  {
-    title: "Watching One Peice",
-    id: 4,
-  },
-]);
-
 function addTodo(payload: string):void {
-  tasks.value.push({
-    title: payload,
-    id: Math.floor(Math.random() * 10000),
-  });
+  store.dispatch('addTodo', payload)
 }
-
 function deleteTodo(payload: task):void {
-  tasks.value = tasks.value.filter((task) => payload.id !== task.id);
+  store.dispatch('deleteTodo', payload)
 }
 </script>
 
