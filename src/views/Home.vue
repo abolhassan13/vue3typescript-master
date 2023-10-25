@@ -13,7 +13,7 @@ import { useI18n } from "vue-i18n";
 import { useCurrentTime } from "@/component/Home/Time";
 
 if (!localStorage.getItem("username")) {
-  let name = prompt(
+  let name: string|null = prompt(
     "Please enter your name(لطفا نام خود را وارد کنید)",
     "Anan"
   );

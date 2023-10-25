@@ -23,7 +23,7 @@ interface task {
   title: string;
   id: number;
 }
-let tasks = ref([
+let tasks = ref<task[]>([
   {
     title: "Learning typescript",
     id: 2,
@@ -38,14 +38,14 @@ let tasks = ref([
   },
 ]);
 
-function addTodo(payload: string) {
+function addTodo(payload: string):void {
   tasks.value.push({
     title: payload,
     id: Math.floor(Math.random() * 10000),
   });
 }
 
-function deleteTodo(payload: task) {
+function deleteTodo(payload: task):void {
   tasks.value = tasks.value.filter((task) => payload.id !== task.id);
 }
 </script>
