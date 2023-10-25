@@ -20,7 +20,7 @@ const emit = defineEmits<{
   (e: "delete-Task", task: task): void;
 }>();
 
-function deleteTask() {
+function deleteTask():void {
   emit("delete-Task", props.task);
 }
 </script>
