@@ -46,9 +46,9 @@ import i18n from "../i18n";
 import { useI18n } from "vue-i18n";
 
 const lang = ref<"en" | "fa">("en");
-const username = ref("");
-const terms = ref<boolean>();
-const themes = ref("blueSky");
+const username = ref<string>("");
+const terms = ref<boolean | undefined>();
+const themes = ref<string>("blueSky");
 let tem: string | null;
 tem = localStorage.getItem("thems");
 
@@ -56,11 +56,11 @@ const { t } = useI18n({
   inheritLocale: true,
   useScope: "local",
 });
-const changeLocale = () => {
+const changeLocale = (): void => {
   i18n.global.locale.value = lang.value;
 };
 
-function handelSubmit() {
+function handelSubmit(): void {
   localStorage.setItem("username", username.value.trim());
   localStorage.setItem("lang", lang.value);
   localStorage.setItem("thems", themes.value);

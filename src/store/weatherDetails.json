@@ -1,0 +1,114 @@
+[
+    {
+      "state": 0,
+      "text": "clear sky"
+    },
+    {
+      "state": 1,
+      "text": "partly cloudy"
+    },
+    {
+      "state": 2,
+      "text": "partly cloudy"
+    },
+    {
+      "state": 3,
+      "text": "partly cloudy"
+    },
+    {
+      "state": 45,
+      "text": "Fog"
+    },
+    {
+      "state": 48,
+      "text": "Fog"
+    },
+    {
+      "state": 51,
+      "text": "Drizzle"
+    },
+    {
+      "state": 53,
+      "text": "Drizzle"
+    },
+    {
+      "state": 55,
+      "text": "Drizzle"
+    },
+    {
+      "state": 56,
+      "text": "Drizzle"
+    },
+    {
+      "state": 57,
+      "text": "Drizzle"
+    },
+    {
+      "state": 61,
+      "text": "Rain"
+    },
+    {
+      "state": 63,
+      "text": "Rain"
+    },
+    {
+      "state": 65,
+      "text": "Rain"
+    },
+    {
+      "state": 66,
+      "text": "Rain"
+    },
+    {
+      "state": 67,
+      "text": "Rain"
+    },
+    {
+      "state": 71,
+      "text": "\tSnow"
+    },
+    {
+      "state": 73,
+      "text": "\tSnow"
+    },
+    {
+      "state": 75,
+      "text": "\tSnow"
+    },
+    {
+      "state": 77,
+      "text": "\tSnow"
+    },
+    {
+      "state": 80,
+      "text": "Rain showers"
+    },
+    {
+      "state": 81,
+      "text": "Rain showers"
+    },
+    {
+      "state": 82,
+      "text": "Rain showers"
+    },
+    {
+      "state": 85,
+      "text": "Snow showers"
+    },
+    {
+      "state": 86,
+      "text": "Snow showers"
+    },
+    {
+      "state": 95,
+      "text": "Thunderstorm"
+    },
+    {
+      "state": 96,
+      "text": "Thunderstorm"
+    },
+    {
+      "state": 99,
+      "text": "Thunderstorm"
+    }
+  ]
