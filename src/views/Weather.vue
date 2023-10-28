@@ -3,6 +3,7 @@
     @keyup.enter="getCity"
     v-model:value="value"
     :options="options"
+    ref="cityIn"
     style="width: 200px"
     placeholder="Enter city name..."
     :filter-option="filterOption"
@@ -15,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import citiesIran from "../store/ir.json";
 import { getWaether } from "@/component/Weather/Weather";
 
@@ -1426,6 +1427,11 @@ const updateUI = (
     card?.classList.add("night");
   }
 };
+
+const cityIn = ref<HTMLInputElement | null>(null);
+onMounted(() => {
+  cityIn.value?.focus();
+});
 </script>
 
 <style scoped>

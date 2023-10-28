@@ -1,12 +1,12 @@
 <template>
   <form @submit.prevent="handeleSubmit" class="addTodo">
-    <input v-model="newTask" placeholder="Add new Todo" />
+    <input ref="todoIn" v-model="newTask" placeholder="Add new Todo" />
     <button @click="handeleSubmit" :class="tem">{{ t("Add") }}</button>
   </form>
 </template>
 
 <script setup lang="ts">
-import { defineEmits, ref } from "vue";
+import { defineEmits, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 let tem: string | null;
@@ -28,6 +28,11 @@ function handeleSubmit(): void {
     newTask.value = "";
   }
 }
+
+const todoIn = ref<HTMLInputElement | null>(null);
+onMounted(() => {
+  todoIn.value?.focus();
+});
 </script>
 
 <style scoped>
