@@ -47,8 +47,19 @@
 </template>
 
 <script lang="ts" setup>
-import { CSSProperties } from "vue";
+import { CSSProperties, provide } from "vue";
 import { useI18n } from "vue-i18n";
+import { todoStore } from "@/store/TodoStore";
+import { Store } from "vuex";
+
+let store: Store<{
+  tasks: {
+    title: string;
+    id: number;
+  }[];
+}> = todoStore;
+
+provide("storeI", store);
 
 let tem: string | null;
 tem = localStorage.getItem("thems");

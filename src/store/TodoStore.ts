@@ -1,12 +1,12 @@
-import { createStore } from "vuex";
-export interface State {
-  tasks: task[];
-}
+import { Store, createStore } from "vuex";
+
 interface task {
   title: string;
   id: number;
 }
-export const todoStore = createStore({
+export const todoStore: Store<{
+  tasks: task[];
+}> = createStore({
   state: {
     tasks: [
       {

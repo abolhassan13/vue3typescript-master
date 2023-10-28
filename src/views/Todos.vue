@@ -3,19 +3,23 @@
     <h3>{{ t("TODO list") }}</h3>
   </header>
   <TodoForm @add-Task="addTodo" />
-  <div v-for="task of store.state.tasks" :key="task.id" class="task-list">
+  <div v-for="task of store!.state.tasks" :key="task.id" class="task-list">
     <TodoDetail :task="task" @delete-Task="deleteTodo" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import TodoDetail from "../component/Todos/TodoDetail.vue";
-import TodoForm from "../component/Todos/TodoForm.vue";
-import { todoStore } from "@/store/TodoStore";
+import { inject } from "vue";
+import { Store } from "vuex";
+import TodoDetail from "@/component/Todos/TodoDetail.vue";
+import TodoForm from "@/component/Todos/TodoForm.vue";
 
-let store = todoStore;
-
+const store:
+  | Store<{
+      tasks: task[];
+    }>
+  | undefined = inject("storeI");
 const { t } = useI18n({
   inheritLocale: true,
   useScope: "local",
@@ -26,10 +30,10 @@ interface task {
   id: number;
 }
 function addTodo(payload: string): void {
-  store.dispatch("addTodo", payload);
+  store!.dispatch("addTodo", payload);
 }
 function deleteTodo(payload: task): void {
-  store.dispatch("deleteTodo", payload);
+  store!.dispatch("deleteTodo", payload);
 }
 </script>
 
